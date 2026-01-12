@@ -8,6 +8,8 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { useAuthStore } from '@/lib/store';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { useState } from 'react';
+import { ChatbotWidget } from 'fyrebot-widget';
+
 
 export default function DashboardLayout({
   children,
@@ -17,7 +19,10 @@ export default function DashboardLayout({
   return (
     <ProtectedRoute>
       <DashboardContent>{children}
-       
+      <ChatbotWidget
+        apiUrl="http://localhost:9002/api"
+        apiKey="sk_uL1Uo7HTSpLn9V6REwEYMxSD7X8wVtEF"
+      />
       </DashboardContent>
     </ProtectedRoute>
   );
