@@ -8,7 +8,6 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { useAuthStore } from '@/lib/store';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { useState } from 'react';
-import { ChatbotWidget } from '../../../../chatbot-widget/src';
 
 export default function DashboardLayout({
   children,
@@ -18,12 +17,7 @@ export default function DashboardLayout({
   return (
     <ProtectedRoute>
       <DashboardContent>{children}
-        <ChatbotWidget 
-          apiKey={'sk_FBCYeaNQVFsRwIIyGHiAHuK8TuClsvES'}
-          apiUrl='http://localhost:3000/api'
-          title='Ask About Aasim shah'
-          primaryColor="#10b5cb"
-        />
+       
       </DashboardContent>
     </ProtectedRoute>
   );

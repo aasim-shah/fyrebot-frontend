@@ -50,11 +50,11 @@ export const Hero = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button variant="hero" size="xl" className="group">
+            <Button variant="default"  className="group">
               Get Started Free
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="heroOutline" size="xl">
+            <Button variant="default" >
               <BookOpen className="w-5 h-5" />
               View Documentation
             </Button>

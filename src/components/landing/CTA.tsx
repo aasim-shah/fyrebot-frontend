@@ -31,11 +31,11 @@ export const CTA = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button variant="hero" size="xl" className="group">
+            <Button variant="link"  className="group">
               Start Building Free
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="heroOutline" size="xl">
+            <Button variant="link">
               Talk to Sales
             </Button>
           </div>
