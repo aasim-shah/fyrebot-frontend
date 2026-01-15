@@ -18,7 +18,7 @@ export const Footer = () => {
               <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
                 <MessageSquare className="w-5 h-5 text-primary-foreground" />
               </div>
-              <span className="font-bold text-xl text-foreground">Clarvobot</span>
+              <span className="font-bold text-xl text-foreground">FyreBot</span>
             </div>
             <p className="text-muted-foreground text-sm max-w-xs mb-6">
               Deploy AI chatbots trained exclusively on your data. Secure, customizable, and easy to integrate.
@@ -55,7 +55,7 @@ export const Footer = () => {
 
         <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2026 Clarvobot. All rights reserved.
+            © 2026 FyreBot. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground">
             Built with security and privacy in mind.

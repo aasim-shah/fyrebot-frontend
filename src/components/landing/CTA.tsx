@@ -27,7 +27,7 @@ export const CTA = () => {
           </h2>
 
           <p className="text-lg text-muted-foreground mb-10">
-            Join companies using Clarvobot to deliver instant, accurate responses to their customers—powered by their own knowledge base.
+            Join companies using FyreBot to deliver instant, accurate responses to their customers—powered by their own knowledge base.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

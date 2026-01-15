@@ -17,7 +17,7 @@ export const Header = () => {
           <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
             <MessageSquare className="w-5 h-5 text-primary-foreground" />
           </div>
-          <span className="font-bold text-xl text-foreground">Clarvobot</span>
+          <span className="font-bold text-xl text-foreground">FyreBot</span>
         </div>
 
         <nav className="hidden md:flex items-center gap-8">

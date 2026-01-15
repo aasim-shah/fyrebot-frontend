@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Terminal, Check } from "lucide-react";
 
-const codeSnippet = `import { ChatWidget } from '@clarvobot/widget';
+const codeSnippet = `import { ChatWidget } from '@fyrebot/widget';
 
 function App() {
   return (

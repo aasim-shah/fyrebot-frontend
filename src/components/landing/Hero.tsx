@@ -76,7 +76,7 @@ export const Hero = () => {
               </div>
               <div className="p-6 font-mono text-sm text-left">
                 <div className="text-muted-foreground">
-                  <span className="text-primary">$</span> npm install @clarvobot/widget
+                  <span className="text-primary">$</span> npm install @fyrebot/widget
                 </div>
                 <div className="mt-2 text-muted-foreground">
                   <span className="text-green-500">✓</span> Package installed successfully
