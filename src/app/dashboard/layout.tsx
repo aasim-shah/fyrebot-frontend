@@ -2,7 +2,8 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Bot, MessageSquare, Database, User, LogOut, Menu } from 'lucide-react';
+import Image from 'next/image';
+import { MessageSquare, Database, User, LogOut, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { useAuthStore } from '@/lib/store';
@@ -74,7 +75,9 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
           </Button>
 
           <Link href="/dashboard" className="flex items-center gap-2">
-            <Bot className="h-6 w-6 text-primary" />
+            <div className="h-6 w-6 relative">
+              <Image src="/logo.png" alt="FyreBot Logo" fill className="object-contain" />
+            </div>
             <span className="font-bold text-lg">FyreBot</span>
           </Link>
 

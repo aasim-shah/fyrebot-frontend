@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { MessageSquare } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import Link from "next/link";
+import Image from "next/image";
 
 export const Header = () => {
   return (
@@ -13,12 +14,12 @@ export const Header = () => {
       className="fixed top-0 left-0 right-0 z-50 glass"
     >
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
-            <MessageSquare className="w-5 h-5 text-primary-foreground" />
+        <Link href="/" className="flex items-center gap-2">
+          <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center p-1">
+            <Image src="/logo.png" alt="FyreBot Logo" width={400} height={400} className="object-contain" />
           </div>
           <span className="font-bold text-xl text-foreground">FyreBot</span>
-        </div>
+        </Link>
 
         <nav className="hidden md:flex items-center gap-8">
           <a href="#how-it-works" className="text-sm text-muted-foreground hover:text-foreground transition-colors">

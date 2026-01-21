@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Bot, Loader2, Sparkles, Shield, Zap, ArrowRight, CheckCircle2 } from 'lucide-react';
+import Image from 'next/image';
+import { Loader2, Sparkles, Shield, Zap, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -74,7 +75,9 @@ export default function RegisterPage() {
       >
         <div className="max-w-md mx-auto">
           <Link href="/" className="inline-flex items-center gap-2 mb-8 group hover:opacity-80 transition-opacity">
-            <Bot className="w-10 h-10 text-primary" />
+            <div className="w-10 h-10 relative">
+              <Image src="/logo.png" alt="FyreBot Logo" fill className="object-contain" />
+            </div>
             <span className="text-2xl font-bold text-foreground">FyreBot</span>
           </Link>
 
@@ -146,7 +149,9 @@ export default function RegisterPage() {
         >
           {/* Mobile logo */}
           <Link href="/" className="flex lg:hidden items-center gap-2 mb-8 justify-center hover:opacity-80 transition-opacity">
-            <Bot className="w-8 h-8 text-primary" />
+            <div className="w-8 h-8 relative">
+              <Image src="/logo.png" alt="FyreBot Logo" fill className="object-contain" />
+            </div>
             <span className="text-xl font-bold text-foreground">FyreBot</span>
           </Link>
 

@@ -1,4 +1,5 @@
 import { MessageSquare, Github, Twitter, Linkedin } from "lucide-react";
+import Image from "next/image";
 
 const footerLinks = {
   Product: ["Features", "Pricing", "Documentation", "API Reference"],
@@ -15,9 +16,9 @@ export const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
-                <MessageSquare className="w-5 h-5 text-primary-foreground" />
-              </div>
+           <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center p-1">
+                       <Image src="/logo.png" alt="FyreBot Logo" width={400} height={400} className="object-contain" />
+                     </div>
               <span className="font-bold text-xl text-foreground">FyreBot</span>
             </div>
             <p className="text-muted-foreground text-sm max-w-xs mb-6">

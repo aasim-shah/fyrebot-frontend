@@ -8,10 +8,12 @@ import { Features } from "@/components/landing/Features";
 import { DeveloperSection } from "@/components/landing/DeveloperSection";
 import { CTA } from "@/components/landing/CTA";
 import { Footer } from "@/components/landing/Footer";
+import { StructuredData } from "@/components/StructuredData";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <StructuredData />
       <Header />
       <main>
         <Hero />
