@@ -23,6 +23,50 @@ const devFeatures = [
   "Webhook integrations available",
 ];
 
+// Helper function to render syntax highlighted code
+const SyntaxHighlight = ({ line }: { line: string }) => {
+  const keywords = ['import', 'from', 'function', 'return', 'export', 'const'];
+  const parts: React.ReactNode[] = [];
+  let remaining = line;
+  
+  keywords.forEach(keyword => {
+    const regex = new RegExp(`\\b${keyword}\\b`, 'g');
+    const newParts: React.ReactNode[] = [];
+    
+    parts.length === 0 ? [remaining] : parts.forEach((part, idx) => {
+      if (typeof part === 'string') {
+        const segments = part.split(regex);
+        const matches = part.match(regex) || [];
+        segments.forEach((segment, i) => {
+          newParts.push(segment);
+          if (matches[i]) {
+            newParts.push(<span key={`${keyword}-${idx}-${i}`} className="text-primary">{matches[i]}</span>);
+          }
+        });
+      } else {
+        newParts.push(part);
+      }
+    });
+    
+    if (parts.length === 0) {
+      const segments = remaining.split(regex);
+      const matches = remaining.match(regex) || [];
+      segments.forEach((segment, i) => {
+        newParts.push(segment);
+        if (matches[i]) {
+          newParts.push(<span key={`${keyword}-${i}`} className="text-primary">{matches[i]}</span>);
+        }
+      });
+    }
+    
+    remaining = '';
+    parts.length = 0;
+    parts.push(...newParts);
+  });
+  
+  return <span className="text-muted-foreground">{parts.length > 0 ? parts : line}</span>;
+};
+
 export const DeveloperSection = () => {
   return (
     <section id="developers" className="py-24 bg-background">
@@ -84,11 +128,7 @@ export const DeveloperSection = () => {
                       <span className="text-muted-foreground/50 select-none mr-4 text-xs">
                         {String(i + 1).padStart(2, '0')}
                       </span>
-                      <span className="text-muted-foreground">
-                        {line
-                          .replace(/import|from|function|return|export/g, (match) => `<span class="text-primary">${match}</span>`)
-                          .split('').join('')}
-                      </span>
+                      <SyntaxHighlight line={line} />
                     </div>
                   ))}
                 </code>

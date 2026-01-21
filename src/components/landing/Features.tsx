@@ -3,7 +3,7 @@ import { FileText, Database, Shield, Palette, Code2, Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const dataFormats = [
-  { label: "PDF", icon: "📄" },
+ 
   { label: "DOCX", icon: "📝" },
   { label: "Markdown", icon: "📋" },
   { label: "JSON", icon: "🗂️" },

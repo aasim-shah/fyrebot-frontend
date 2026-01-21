@@ -1,8 +1,8 @@
-
 "use client"
 
 import { Header } from "@/components/landing/Header";
 import { Hero } from "@/components/landing/Hero";
+import { VideoSection } from "@/components/landing/VideoSection";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { Features } from "@/components/landing/Features";
 import { DeveloperSection } from "@/components/landing/DeveloperSection";
@@ -15,6 +15,7 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
+        <VideoSection />
         <HowItWorks />
         <Features />
         <DeveloperSection />

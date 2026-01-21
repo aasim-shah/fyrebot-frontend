@@ -6,25 +6,21 @@ const steps = [
     icon: UserPlus,
     title: "Create Account",
     description: "Sign up and access your personal dashboard in seconds.",
-    step: "01",
   },
   {
     icon: Upload,
     title: "Upload Your Data",
     description: "Add PDFs, docs, markdown, or paste text directly.",
-    step: "02",
   },
   {
     icon: Key,
     title: "Get Your API Key",
     description: "Generate a secure API key from your dashboard.",
-    step: "03",
   },
   {
     icon: Rocket,
     title: "Go Live",
     description: "Install the widget and your chatbot is ready to serve.",
-    step: "04",
   },
 ];
 
@@ -49,76 +45,71 @@ const itemVariants = {
 
 export const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="py-32 bg-muted/30 relative overflow-hidden">
+    <section id="how-it-works" className="relative py-24 lg:py-32">
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="mx-auto mb-16 max-w-2xl text-center"
         >
-          <span className="inline-block text-primary text-sm font-semibold tracking-wider uppercase mb-4">
+          <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-primary">
             Simple Setup
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl">
             Up and running in{" "}
             <span className="text-gradient">four steps</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground">
             From signup to live chatbot in minutes. No complex configuration required.
           </p>
         </motion.div>
 
+        {/* Steps */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="relative"
+          className="relative mx-auto max-w-5xl"
         >
-          {/* Horizontal connector line for desktop */}
-          <div className="hidden lg:block absolute top-24 left-[12%] right-[12%] h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+          {/* Vertical Connection Line */}
+          <div className="absolute left-[50%] top-8 hidden h-[calc(100%-4rem)] w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent lg:block" />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+          <div className="grid gap-8 lg:gap-0">
             {steps.map((step, index) => (
               <motion.div
-                key={step.step}
+                key={step.title}
                 variants={itemVariants}
-                className="relative group"
+                className={`relative flex flex-col items-center gap-6 lg:flex-row lg:gap-16 ${
+                  index % 2 === 1 ? "lg:flex-row-reverse" : ""
+                }`}
               >
-                <div className="flex flex-col items-center text-center">
-                  {/* Step number badge */}
-                  <div className="relative mb-6">
-                    <div className="w-20 h-20 rounded-2xl bg-card border-2 border-border group-hover:border-primary/50 transition-all duration-300 flex items-center justify-center shadow-lg group-hover:shadow-glow">
-                      <step.icon className="w-8 h-8 text-primary" />
-                    </div>
-                    {/* Step number */}
-                    <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full gradient-primary flex items-center justify-center text-xs font-bold text-primary-foreground shadow-md">
-                      {step.step}
-                    </div>
-                    {/* Glow effect on hover */}
-                    <div className="absolute inset-0 rounded-2xl bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+                {/* Content */}
+                <div className={`flex-1 text-center ${index % 2 === 0 ? "lg:text-right" : "lg:text-left"}`}>
+                  <div className="inline-block">
+                    <span className="mb-2 inline-block text-5xl font-bold text-primary/20">
+                      0{index + 1}
+                    </span>
+                    <h3 className="mb-2 text-xl font-bold sm:text-2xl">{step.title}</h3>
+                    <p className="text-muted-foreground">{step.description}</p>
                   </div>
-
-                  {/* Content */}
-                  <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
-                    {step.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed max-w-[240px]">
-                    {step.description}
-                  </p>
-
-                  {/* Arrow indicator for mobile/tablet */}
-                  {index < steps.length - 1 && (
-                    <div className="lg:hidden mt-6 w-px h-8 bg-gradient-to-b from-primary/30 to-transparent" />
-                  )}
                 </div>
+
+                {/* Icon */}
+                <div className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-border bg-card shadow-xl shadow-primary/15">
+                  <step.icon className="h-7 w-7 text-primary" />
+                </div>
+
+                {/* Spacer for layout */}
+                <div className="hidden flex-1 lg:block" />
               </motion.div>
             ))}
           </div>

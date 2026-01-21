@@ -15,8 +15,35 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FyreBot - AI-Powered Customer Support",
-  description: "Multi-tenant SaaS chatbot platform with RAG capabilities",
+  title: "FyreBot - Deploy AI Chatbot Trained on Your Data in Minutes",
+  description: "Embed an intelligent AI chatbot that answers questions using only your knowledge. No hallucinations. Complete control via npm package and API. Watch our intro video to get started.",
+  keywords: "AI chatbot, custom chatbot, RAG chatbot, embed chatbot, chatbot widget, customer support AI, knowledge base chatbot",
+  openGraph: {
+    title: "FyreBot - AI Chatbot Trained on Your Data",
+    description: "Deploy a custom AI chatbot in minutes. Watch our intro video and get started today.",
+    type: "website",
+    videos: [
+      {
+        url: "https://www.youtube.com/watch?v=NohtjPWUdxQ",
+        width: 1280,
+        height: 720,
+        type: "video/mp4",
+      },
+    ],
+  },
+  twitter: {
+    card: "player",
+    title: "FyreBot - AI Chatbot Platform",
+    description: "Deploy an AI chatbot trained on your data in minutes",
+    players: [
+      {
+        playerUrl: "https://www.youtube.com/embed/NohtjPWUdxQ",
+        streamUrl: "https://www.youtube.com/watch?v=NohtjPWUdxQ",
+        width: 1280,
+        height: 720,
+      },
+    ],
+  },
 };
 
 export default function RootLayout({

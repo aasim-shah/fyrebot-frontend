@@ -38,9 +38,9 @@ export const Header = () => {
             <Link href="/login">
             Sign In</Link>
           </Button>
-          <Button variant="default" size="sm">
+          {/* <Button variant="default" size="sm">
             Get Started
-          </Button>
+          </Button> */}
         </div>
       </div>
     </motion.header>
