@@ -1,6 +1,6 @@
-# ChatBot SaaS - Frontend Application
+# FyreBot - Frontend Application
 
-A modern, production-ready Next.js frontend for the multi-tenant ChatBot SaaS platform.
+A modern, production-ready Next.js frontend for the multi-tenant FyreBot platform.
 
 ## 🚀 Features
 

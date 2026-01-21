@@ -16,14 +16,7 @@ import {
 import { Button } from '@/components/ui/button';
 
 const formatGuide = [
-  {
-    icon: FileText,
-    name: 'PDF',
-    extensions: ['.pdf'],
-    color: 'text-red-500',
-    description: 'Portable Document Format - Supports text extraction from standard PDFs',
-    bestFor: 'Documentation, reports, manuals',
-  },
+ 
   {
     icon: File,
     name: 'DOCX/DOC',

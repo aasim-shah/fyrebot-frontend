@@ -8,8 +8,6 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { useAuthStore } from '@/lib/store';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { useState } from 'react';
-import { ChatbotWidget } from 'fyrebot-widget';
-
 
 export default function DashboardLayout({
   children,
@@ -19,10 +17,14 @@ export default function DashboardLayout({
   return (
     <ProtectedRoute>
       <DashboardContent>{children}
-      <ChatbotWidget
+      {/* <ChatbotWidget
         apiUrl="http://localhost:9002/api"
         apiKey="sk_uL1Uo7HTSpLn9V6REwEYMxSD7X8wVtEF"
-      />
+      fontSize="15px"
+      headerFontSize="15px"
+      smallFontSize="15px"
+       
+      /> */}
       </DashboardContent>
     </ProtectedRoute>
   );
@@ -73,7 +75,7 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
 
           <Link href="/dashboard" className="flex items-center gap-2">
             <Bot className="h-6 w-6 text-primary" />
-            <span className="font-bold text-lg">ChatBot SaaS</span>
+            <span className="font-bold text-lg">FyreBot</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-1 ml-8">

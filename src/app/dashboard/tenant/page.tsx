@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Key, TrendingUp, Copy, Check, RefreshCw, Loader2, Plus, AlertCircle, Eye, EyeOff } from 'lucide-react';
+import { Key, TrendingUp, Copy, Check, RefreshCw, Loader2, Plus, AlertCircle, Eye, EyeOff, Trash2, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -23,6 +23,11 @@ interface ApiKey {
   lastUsed: string | null;
 }
 
+interface OpenAIKeyStatus {
+  hasKey: boolean;
+  hint: string | null;
+}
+
 export default function TenantPage() {
   const { tenant, setAuth } = useAuthStore();
   const [isLoading, setIsLoading] = useState(false);
@@ -37,9 +42,17 @@ export default function TenantPage() {
     email: tenant?.email || '',
   });
 
+  // OpenAI API Key state
+  const [openAIKeyStatus, setOpenAIKeyStatus] = useState<OpenAIKeyStatus | null>(null);
+  const [openAIKey, setOpenAIKey] = useState('');
+  const [isSavingOpenAIKey, setIsSavingOpenAIKey] = useState(false);
+  const [isDeletingOpenAIKey, setIsDeletingOpenAIKey] = useState(false);
+  const [showOpenAIKeyInput, setShowOpenAIKeyInput] = useState(false);
+
   useEffect(() => {
     loadUsageStats();
     loadApiKeys();
+    loadOpenAIKeyStatus();
   }, []);
 
   const loadUsageStats = async () => {
@@ -57,6 +70,55 @@ export default function TenantPage() {
       setApiKeys(response.data);
     } catch (error: any) {
       console.error('Failed to load API keys:', error);
+    }
+  };
+
+  const loadOpenAIKeyStatus = async () => {
+    try {
+      const response = await tenantApi.getOpenAIKeyStatus();
+      setOpenAIKeyStatus(response.data);
+    } catch (error: any) {
+      console.error('Failed to load OpenAI key status:', error);
+    }
+  };
+
+  const handleSaveOpenAIKey = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!openAIKey.trim()) {
+      toast.error('Please enter your OpenAI API key');
+      return;
+    }
+
+    setIsSavingOpenAIKey(true);
+    try {
+      const response = await tenantApi.saveOpenAIKey(openAIKey);
+      toast.success('OpenAI API key saved successfully!');
+      setOpenAIKey('');
+      setShowOpenAIKeyInput(false);
+      await loadOpenAIKeyStatus();
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || 'Failed to save OpenAI API key');
+      console.error('Save OpenAI key error:', error);
+    } finally {
+      setIsSavingOpenAIKey(false);
+    }
+  };
+
+  const handleDeleteOpenAIKey = async () => {
+    if (!confirm('Are you sure you want to delete your OpenAI API key? This will disable AI features until you add a new key.')) {
+      return;
+    }
+
+    setIsDeletingOpenAIKey(true);
+    try {
+      await tenantApi.deleteOpenAIKey();
+      toast.success('OpenAI API key deleted successfully');
+      await loadOpenAIKeyStatus();
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || 'Failed to delete OpenAI API key');
+      console.error('Delete OpenAI key error:', error);
+    } finally {
+      setIsDeletingOpenAIKey(false);
     }
   };
 
@@ -163,6 +225,126 @@ export default function TenantPage() {
               )}
             </Button>
           </form>
+        </CardContent>
+      </Card>
+
+      {/* OpenAI API Key Management */}
+      <Card>
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle className="flex items-center gap-2">
+                <Sparkles className="h-5 w-5" />
+                OpenAI API Key
+              </CardTitle>
+              <CardDescription>
+                Add your own OpenAI API key to power the AI chatbot
+              </CardDescription>
+            </div>
+            {openAIKeyStatus?.hasKey && !showOpenAIKeyInput && (
+              <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100">
+                <Check className="h-3 w-3 mr-1" />
+                Configured
+              </Badge>
+            )}
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {openAIKeyStatus?.hasKey && !showOpenAIKeyInput ? (
+            <div className="space-y-4">
+              <div className="flex items-center justify-between p-4 border rounded-lg bg-muted/50">
+                <div>
+                  <p className="font-medium text-sm">Current API Key</p>
+                  <code className="text-xs bg-background px-2 py-1 rounded font-mono mt-1 inline-block">
+                    {openAIKeyStatus.hint}
+                  </code>
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setShowOpenAIKeyInput(true)}
+                  >
+                    Update Key
+                  </Button>
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    onClick={handleDeleteOpenAIKey}
+                    disabled={isDeletingOpenAIKey}
+                  >
+                    {isDeletingOpenAIKey ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Trash2 className="h-4 w-4" />
+                    )}
+                  </Button>
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                ✅ Your OpenAI API key is securely stored and encrypted. All API calls will use your key.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSaveOpenAIKey} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="openai-key">OpenAI API Key</Label>
+                <Input
+                  id="openai-key"
+                  type="password"
+                  placeholder="sk-..."
+                  value={openAIKey}
+                  onChange={(e) => setOpenAIKey(e.target.value)}
+                  required
+                />
+                <p className="text-xs text-muted-foreground">
+                  Get your API key from{' '}
+                  <a
+                    href="https://platform.openai.com/api-keys"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary underline hover:no-underline"
+                  >
+                    OpenAI Platform
+                  </a>
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <Button type="submit" disabled={isSavingOpenAIKey}>
+                  {isSavingOpenAIKey ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Validating & Saving...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="mr-2 h-4 w-4" />
+                      Save API Key
+                    </>
+                  )}
+                </Button>
+                {showOpenAIKeyInput && openAIKeyStatus?.hasKey && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => {
+                      setShowOpenAIKeyInput(false);
+                      setOpenAIKey('');
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                )}
+              </div>
+              <Alert>
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>
+                  <strong>Security:</strong> Your API key is encrypted before storage and never exposed. 
+                  We validate the key with OpenAI before saving.
+                </AlertDescription>
+              </Alert>
+            </form>
+          )}
         </CardContent>
       </Card>
 

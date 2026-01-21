@@ -1,4 +1,4 @@
-# ChatBot SaaS Frontend - Complete Implementation
+# FyreBot Frontend - Complete Implementation
 
 ## ✅ Implementation Complete
 

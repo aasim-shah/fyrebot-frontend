@@ -71,6 +71,22 @@ export const tenantApi = {
     const response = await api.post('/tenants/api-keys', { name });
     return response.data;
   },
+
+  // OpenAI API Key Management
+  getOpenAIKeyStatus: async () => {
+    const response = await api.get('/tenants/openai-key');
+    return response.data;
+  },
+
+  saveOpenAIKey: async (openaiApiKey: string) => {
+    const response = await api.post('/tenants/openai-key', { openaiApiKey });
+    return response.data;
+  },
+
+  deleteOpenAIKey: async () => {
+    const response = await api.delete('/tenants/openai-key');
+    return response.data;
+  },
 };
 
 // Data Registry API
