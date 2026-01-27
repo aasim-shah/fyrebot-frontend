@@ -190,4 +190,85 @@ export const chatApi = {
   },
 };
 
+// Subscription API
+export const subscriptionApi = {
+  getPlans: async () => {
+    const response = await api.get('/subscription/plans');
+    return response.data;
+  },
+
+  createCheckoutSession: async (successUrl: string, cancelUrl: string) => {
+    const response = await api.post('/subscription/checkout', {
+      successUrl,
+      cancelUrl,
+    });
+    return response.data;
+  },
+
+  createBillingPortalSession: async (returnUrl: string) => {
+    const response = await api.post('/subscription/billing-portal', {
+      returnUrl,
+    });
+    return response.data;
+  },
+
+  getSubscription: async () => {
+    const response = await api.get('/subscription/subscription');
+    return response.data;
+  },
+
+  cancelSubscription: async () => {
+    const response = await api.post('/subscription/cancel');
+    return response.data;
+  },
+};
+
+// Ticket API
+export const ticketApi = {
+  // Get all tickets for the tenant
+  list: async (filters?: { status?: string; priority?: string; email?: string; limit?: number; skip?: number; search?: string }) => {
+    const response = await api.get('/tickets', { params: filters });
+    return response.data;
+  },
+
+  // Get ticket statistics
+  getStats: async () => {
+    const response = await api.get('/tickets/stats');
+    return response.data;
+  },
+
+  // Get a single ticket by ID
+  get: async (ticketId: string) => {
+    const response = await api.get(`/tickets/${ticketId}`);
+    return response.data;
+  },
+
+  // Update ticket status
+  updateStatus: async (ticketId: string, status: 'open' | 'in_progress' | 'resolved' | 'closed') => {
+    const response = await api.patch(`/tickets/${ticketId}/status`, { status });
+    return response.data;
+  },
+
+  // Update ticket priority
+  updatePriority: async (ticketId: string, priority: 'low' | 'medium' | 'high') => {
+    const response = await api.patch(`/tickets/${ticketId}/priority`, { priority });
+    return response.data;
+  },
+
+  // Add a response to a ticket
+  addResponse: async (ticketId: string, message: string, isInternal?: boolean) => {
+    const response = await api.post(`/tickets/${ticketId}/responses`, { 
+      message,
+      isInternal: isInternal || false,
+    });
+    return response.data;
+  },
+
+  // Delete a ticket
+  delete: async (ticketId: string) => {
+    const response = await api.delete(`/tickets/${ticketId}`);
+    return response.data;
+  },
+};
+
 export default api;

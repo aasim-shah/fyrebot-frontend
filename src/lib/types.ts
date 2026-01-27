@@ -4,6 +4,21 @@ export interface Tenant {
   email: string;
   apiKey: string;
   plan: 'free' | 'pro' | 'enterprise';
+  limits?: {
+    apiKeys: number;
+    dataFiles: number;
+    maxFileSize: number;
+    chatbots: number;
+    storageLimit?: number;
+    monthlyMessages?: number;
+    maxDataItems?: number;
+    maxChunkSize?: number;
+  };
+  stripeCustomerId?: string;
+  stripeSubscriptionId?: string;
+  stripeSubscriptionStatus?: string;
+  subscriptionStartDate?: string;
+  subscriptionEndDate?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -45,8 +60,9 @@ export interface UsageStats {
   apiCallsLimit: number;
   sectionsCount: number;
   sectionsLimit: number;
-  requestsPerMinute: number;
   requestsPerMinuteLimit: number;
+  storageUsed?: number;
+  requestsPerMinute?: number;
 }
 
 export interface ApiResponse<T = any> {

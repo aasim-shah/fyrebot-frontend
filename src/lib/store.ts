@@ -9,11 +9,21 @@ interface Tenant {
   businessName: string;
   plan: string;
   createdAt?: string;
-  limits: {
-    monthlyMessages: number;
-    maxDataItems: number;
-    maxChunkSize: number;
+  limits?: {
+    apiKeys?: number;
+    dataFiles?: number;
+    maxFileSize?: number;
+    chatbots?: number;
+    storageLimit?: number;
+    monthlyMessages?: number;
+    maxDataItems?: number;
+    maxChunkSize?: number;
   };
+  stripeCustomerId?: string;
+  stripeSubscriptionId?: string;
+  stripeSubscriptionStatus?: string;
+  subscriptionStartDate?: string;
+  subscriptionEndDate?: string;
 }
 
 interface AuthState {
