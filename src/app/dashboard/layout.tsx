@@ -9,7 +9,6 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { useAuthStore } from '@/lib/store';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { useState } from 'react';
-import { ChatbotWidget } from '../../../../chatbot-widget/src/ChatbotWidget';
 
 export default function DashboardLayout({
   children,
@@ -19,7 +18,7 @@ export default function DashboardLayout({
   return (
     <ProtectedRoute>
       <DashboardContent>{children}
-      <ChatbotWidget
+      {/* <ChatbotWidget
         apiUrl="http://localhost:9002/api"
         apiKey="sk_uL1Uo7HTSpLn9V6REwEYMxSD7X8wVtEF"
       fontSize="15px"
@@ -27,7 +26,7 @@ export default function DashboardLayout({
       smallFontSize="15px"
       enableContactSupport={true}  // New prop!
        
-      />
+      /> */}
       </DashboardContent>
     </ProtectedRoute>
   );
